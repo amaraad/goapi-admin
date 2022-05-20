@@ -5,6 +5,7 @@ import LoadingComponent from './LoadingComponent';
 import Table, { AvatarCell, SelectColumnFilter, StatusPill } from './Table';
 import CategoryForm from './CategoryForm';
 import { Toaster, toast, resolveValue } from "react-hot-toast";
+import { isCompositeType } from 'graphql';
 
 const CATEGORIES_QUERY = gql`
   query categories{
@@ -22,8 +23,10 @@ const DELETE_CATEGORY_MUTATION = gql`
 `;
 
 const PrivateComponent = () => {
+  // manually fetch
+  const [fetch, setFetch] = useState(null);
   // Fetch data
-  const { data, loading, error , refetch} = useQuery(CATEGORIES_QUERY);
+  const { data, loading, error , refetch} = useQuery(CATEGORIES_QUERY, {manual: true});
   
   const [deleteCategory] = useMutation(DELETE_CATEGORY_MUTATION);
   // Window show hide
@@ -33,10 +36,15 @@ const PrivateComponent = () => {
   // Category Id
   const [category, setCategory] = useState({'id': null});
 
+
   // Detect state change for certain fields
   useEffect(() => {
       refetch();
   }, [categoryFormPurpose]);
+
+  useEffect(() => {
+    refetch();
+}, [fetch]);
 
   useEffect(() => {
     console.log("Info : ", info);
@@ -68,7 +76,7 @@ const PrivateComponent = () => {
       console.log(data)
       if (data?.deleteCategory == "OK") {
         setInfo("delete_success");
-        refetch();
+        setFetch(new Date());
       }
     } catch (error) {
       setInfo(error);
