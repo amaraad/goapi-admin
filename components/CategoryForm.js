@@ -12,14 +12,14 @@ const CREATE_CATEGORY_MUTATION = gql`
 
 
 const UPDATE_CATEGORY_MUTATION = gql`
-  mutation editCategory($category: InputCategory!, $categoryId: ID!){
-    editCategory(category:{category: $category, categoryId: $categoryId})
+  mutation editCategory($category: InputCategory!, $categoryId: ID!) {
+    editCategory(category: $category, categoryId: $categoryId)
   }
 `;
 
 const CategoryForm = ({ categoryFormPurpose, setCategoryFormPurpose, setInfo, category}) => {
-  const [createCategory] = useMutation(CREATE_CATEGORY_MUTATION);
-  const [updateCategory] = useMutation(UPDATE_CATEGORY_MUTATION);
+  const [addCategory] = useMutation(CREATE_CATEGORY_MUTATION);
+  const [editCategory] = useMutation(UPDATE_CATEGORY_MUTATION);
   const [message, setMessage] = useState(null);
   const [error, setError] = useState(null);
 
@@ -29,7 +29,7 @@ const CategoryForm = ({ categoryFormPurpose, setCategoryFormPurpose, setInfo, ca
 
     try {
       console.log('Input name : ', name.value);
-      const { data } = await createCategory({
+      const { data } = await addCategory({
         variables: {
           category: {
             name: name.value
@@ -55,7 +55,7 @@ const CategoryForm = ({ categoryFormPurpose, setCategoryFormPurpose, setInfo, ca
 
     try {
       console.log('Input name : ', name.value);
-      const { data } = await updateCategory({
+      const { data } = await editCategory({
         variables: {
           category: {
             name: name.value,

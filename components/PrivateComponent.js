@@ -65,6 +65,7 @@ const PrivateComponent = () => {
           categoryId: cell.row.values["id"]
         },
       });
+      console.log(data)
       if (data?.deleteCategory == "OK") {
         setInfo("delete_success");
         refetch();
