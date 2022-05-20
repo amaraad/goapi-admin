@@ -5,25 +5,15 @@ import { useAuth } from './AuthProvider';
 
 
 const CREATE_CATEGORY_MUTATION = gql`
-  mutation createCategory($category: CategoryCreateInput!){
-    createCategory(input:{category: $category}){
-      message
-      category {
-        id
-      }
-    }
+  mutation addCategory($category: InputCategory!){
+    addCategory(category:$category)
   }
 `;
 
 
 const UPDATE_CATEGORY_MUTATION = gql`
-  mutation updateCategory($category: CategoryCreateInput!, $categoryId: ID!){
-    updateCategory(input:{category: $category, categoryId: $categoryId}){
-      message
-      category {
-        id
-      }
-    }
+  mutation editCategory($category: InputCategory!, $categoryId: ID!){
+    editCategory(category:{category: $category, categoryId: $categoryId})
   }
 `;
 
@@ -47,7 +37,7 @@ const CategoryForm = ({ categoryFormPurpose, setCategoryFormPurpose, setInfo, ca
         },
       });
       console.log(data);
-      if (data?.createCategory?.message == "OK") {
+      if (data?.addCategory == "OK") {
         setCategoryFormPurpose(undefined);
         setInfo("insert_success");
       }
@@ -74,7 +64,7 @@ const CategoryForm = ({ categoryFormPurpose, setCategoryFormPurpose, setInfo, ca
         },
       });
       console.log(data);
-      if (data?.updateCategory?.message == "OK") {
+      if (data?.editCategory == "OK") {
         setCategoryFormPurpose(undefined);
         setInfo("update_success");
       }

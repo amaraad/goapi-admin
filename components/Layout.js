@@ -15,32 +15,32 @@ const SIGN_OUT_MUTATION = gql`
 `;
 
 const Layout = ({ children, title }) => {
-  const { authState, signOut } = useAuth();
+  // const { authState, signOut } = useAuth();
 
-  const [authFormPurpose, setAuthFormPurpose] = useState();
+  // const [authFormPurpose, setAuthFormPurpose] = useState();
 
-  const [signOutMutation] = useMutation(SIGN_OUT_MUTATION);
+  // const [signOutMutation] = useMutation(SIGN_OUT_MUTATION);
 
-  const handleSignOut = async () => {
-    await signOutMutation({
-      variables: {
-        userId: authState.userId,
-      },
-    });
-    signOut();
-  };
+  // const handleSignOut = async () => {
+  //   await signOutMutation({
+  //     variables: {
+  //       userId: authState.userId,
+  //     },
+  //   });
+  //   signOut();
+  // };
 
   return (
     <>
       <Head>
         <title>{title}</title>
       </Head>
-      {authFormPurpose && (
+      {/* {authFormPurpose && (
         <AuthForm
           authFormPurpose={authFormPurpose}
           setAuthFormPurpose={setAuthFormPurpose}
         />
-      )}
+      )} */}
       <div className="min-h-screen bg-gray-100">
         <nav className="bg-white shadow-sm">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -50,7 +50,7 @@ const Layout = ({ children, title }) => {
                   <div className="text-lg font-semibold">My Application Title</div>
                 </div>
                 {/* Navbar begins */}
-                {authState.userId ? (
+                {/* {authState.userId ? ( */}
                 <div className="max-w-7xl mx-auto px-8">
                     <div className="flex items-center justify-between h-16">
                         <div className=" flex items-center">
@@ -88,7 +88,7 @@ const Layout = ({ children, title }) => {
                         </div>
                     </div>
                 </div>
-                ) : (<></>)} 
+                {/* ) : (<></>)}  */}
                 {/* Navbar Ends */}
                 <div className="md:hidden">
                     <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
@@ -107,7 +107,7 @@ const Layout = ({ children, title }) => {
                     </div>
                 </div>
               </div>
-              <div className="flex">
+              {/* <div className="flex">
                 <button
                   type="button"
                   onClick={
@@ -129,7 +129,7 @@ const Layout = ({ children, title }) => {
                   <span className="absolute left-0 inset-y-0 flex items-center pl-3" />
                   Register
                 </button>}
-              </div>
+              </div> */}
             </div>
           </div>
         </nav>

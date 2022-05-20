@@ -9,7 +9,8 @@ const Home = () => {
 
   return (
     <Layout title="Home">
-      {authState.userId ? <PrivateComponent /> : <PublicComponent />}
+      {/* {authState.userId ? <PrivateComponent /> : <PublicComponent />} */}
+      <PrivateComponent />
     </Layout>
   );
 };
