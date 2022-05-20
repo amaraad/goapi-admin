@@ -16,10 +16,8 @@ const CATEGORIES_QUERY = gql`
 `;
 
 const DELETE_CATEGORY_MUTATION = gql`
-  mutation deleteCategory($categoryId: ID!){
-    deleteCategory(input:{categoryId: $categoryId}){
-      message
-    }
+  mutation deleteCategory($categoryId:ID!){
+    deleteCategory(id:$categoryId)
   }
 `;
 
@@ -67,14 +65,12 @@ const PrivateComponent = () => {
           categoryId: cell.row.values["id"]
         },
       });
-      if (data?.deleteCategory?.message == "OK") {
+      if (data?.deleteCategory == "OK") {
         setInfo("delete_success");
         refetch();
       }
     } catch (error) {
-      let error_msg = error["message"].split(":")[1];
-      setError(error_msg)
-      setInfo(error_msg);
+      setInfo(error);
     }    
   }
 
